@@ -2,23 +2,39 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  age: number;
+  profilePicture?: string;
+}
+
+interface UserProfileProps {
+  user: User;
+}
+
+const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
+  return (
+    <div>
+      <h1>{user.firstName} {user.lastName}</h1>
+      <p>{user.age}</p>
+      {user.profilePicture && <img src={user.profilePicture} alt="Profile" />}
+    </div>
+  );
+}
+
 function App() {
+  const user: User = {
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 25,
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserProfile user={user} />
     </div>
   );
 }
